@@ -8,7 +8,7 @@ void init_serial(void (*rxh)(char)) {
 
 	// 1200 baud w/ 1MHz internal osc
 	UBRRH = 0;
-	UBRRL = 52;
+	UBRRL = 51;
 
 	// 8N1
 	UCSRC = (1<<URSEL)|(3<<UCSZ0);

@@ -2,7 +2,7 @@
 # Please note that leaving OPTIMIZE at -O2 is critical to operation.
 
 PRG            = main
-OBJ            = main.o serial.o timing.o
+OBJ            = main.o serial.o timing.o rotor.o
 			
 MCU_TARGET     = atmega8
 OPTIMIZE       = -O2
