@@ -52,7 +52,7 @@ int main(void)
     register_10hz_tick_callback(pos_controller, (void *)&rs);
     enable_tracking(&rs);
 
-    tick_delay(20); // 2s
+    tick_delay(10); // 1s
 
     set_target_el_deg(&rs, 30); // should be approx 7 sec
     set_target_az_deg(&rs, 30); // should be approx 5 sec

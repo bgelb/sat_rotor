@@ -20,9 +20,10 @@ void reinit_rotor_pos (rotor_state_t *s) {
     AZ_CCW_ON;
     EL_UP_ON;
 
-    for(i=0;i<(MAX_AZ/1000+5);i++) {
-        tick_delay(1); //10;
-    }
+    //for(i=0;i<(MAX_AZ/1000+5);i++) {
+    //    tick_delay(10);
+    //}
+    tick_delay(100);
 
     AZ_CCW_OFF;
     EL_UP_OFF;
@@ -37,12 +38,12 @@ void reinit_rotor_pos (rotor_state_t *s) {
 
 void set_target_az_deg (rotor_state_t *s, unsigned int az) {
     if(az >= 0 && az <= 360)
-        s->target_pos.az_ticks = (int)(az*(MAX_AZ/360.0)); // lookup table?
+        s->target_pos.az_ticks = az*AZ_TICKS_PER_DEG; // lookup table?
 }
 
 void set_target_el_deg (rotor_state_t *s, unsigned int el) {
     if(el >= 0 && el <= 90)
-        s->target_pos.el_ticks = (int)(el*(MAX_EL/90.0)); // lookup table?
+        s->target_pos.el_ticks = el*EL_TICKS_PER_DEG; // lookup table?
 }
 
 void enable_tracking (rotor_state_t *s) {
@@ -118,7 +119,7 @@ void pos_controller (rotor_state_t *s) {
         else if(s->target_pos.el_ticks + EL_ERR_MAX < s->pos.el_ticks) { // target DOWN
             if(s->el_drive_state == EL_IDLE) {
                 s->el_drive_state = EL_DOWN;
-                AZ_CCW_ON;
+                EL_DOWN_ON;
             }
             else if(s->el_drive_state == EL_UP) {
                 s->el_drive_state = EL_IDLE;

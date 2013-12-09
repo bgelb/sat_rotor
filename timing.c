@@ -11,9 +11,9 @@ void *cb_state_10hz;
 
 void init_timing() {
 	TCCR1A = 0x00;
-	TCCR1B = 0x05; // Timer 0 at 1kHz
+	TCCR1B = 0x01; // Timer 0 at 1MHz
 	TIMSK = 1<<TOIE1; // Turn on interrupt for Timer 0
-    TCNT1 = 65535 - 1;
+    TCNT1 = 65535 - 1000;
     cb_func_10hz = NULL;
     cb_state_10hz = NULL;
     freq_div = 0;
@@ -21,7 +21,6 @@ void init_timing() {
 
 void tick_delay(unsigned short ticks) {
 	delay = ticks*100;
-	//TCNT1 = 65535 - (ticks*100);
 
 	while(delay>0) {
 	}
@@ -39,7 +38,7 @@ void unregister_10hz_tick_callback() {
 }
 
 SIGNAL(SIG_OVERFLOW1) {
-	TCNT1 = 65535 - 1; // 1ms interval
+	TCNT1 = 65535 - 1000; // 1ms interval
 	
     if(delay>0) delay--;
     
