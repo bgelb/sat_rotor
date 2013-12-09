@@ -35,15 +35,15 @@ int main(void)
         ser_getline(lineb, 64);
   
         if(lineb[0] == 'C' && lineb[1] == '\0') {
-            sprintf(obuf, "AZ=%03d\r\n", get_az_deg(&rs));
+            sprintf(obuf, "+0%03d\r\n", get_az_deg(&rs));
             ser_send_string(obuf);
         }
         else if(lineb[0] == 'C' && lineb[1] == '2') {
-            sprintf(obuf, "AZ=%03d EL=%03d\r\n", get_az_deg(&rs), get_el_deg(&rs));
+            sprintf(obuf, "+0%03d +0%03d\r\n", get_az_deg(&rs), get_el_deg(&rs));
             ser_send_string(obuf);
         }
         else if(lineb[0] == 'B' && lineb[1] == '\0') {
-            sprintf(obuf, "EL=%03d\r\n", get_el_deg(&rs));
+            sprintf(obuf, "+0%03d\r\n", get_el_deg(&rs));
             ser_send_string(obuf);
         }
         else if(lineb[0] == 'M') {
