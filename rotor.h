@@ -48,6 +48,8 @@ typedef struct {
 void reinit_rotor_pos (rotor_state_t *s);
 void set_target_az_deg (rotor_state_t *s, unsigned int az);
 void set_target_el_deg (rotor_state_t *s, unsigned int el);
+int get_az_deg (rotor_state_t *s);
+int get_el_deg (rotor_state_t *s);
 void enable_tracking(rotor_state_t *s);
 void disable_tracking(rotor_state_t *s);
 void pos_controller (rotor_state_t *s);

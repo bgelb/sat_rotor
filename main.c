@@ -1,15 +1,21 @@
 #include <string.h>
 #include <avr/interrupt.h>
 #include <avr/io.h>
+#include <stdio.h>
 #include "serial.h"
 #include "timing.h"
 #include "rotor.h"
+
+char rxb[128];
+char lineb[64];
+char obuf[64];
 
 int main(void)
 {
     rotor_state_t rs;
 
-	init_serial(NULL);
+    init_ser_rx(rxb, 128);
+	init_serial();
     init_timing();
 	sei();
 
@@ -18,46 +24,49 @@ int main(void)
     DDRB = 0x38;
     DDRD = 0x40;
 
-    //ser_send_byte('h');
-    //tick_delay(200);    
-    //ser_send_byte('e');
-    //tick_delay(200);    
-    //ser_send_byte('l');
-    //tick_delay(200);    
-    //ser_send_byte('l');
-    //tick_delay(200);    
-    //ser_send_byte('o');
-    //tick_delay(200);
-
-    //AZ_CW_ON;
-    //tick_delay(200);   
-    //PORTB |= 0x08;
-    //tick_delay(200);    
-    //PORTB |= 0x20;
-    //tick_delay(200);    
-    //PORTB |= 0x10;
-    //tick_delay(200);    
- 
-    //AZ_CW_OFF;
-    //tick_delay(200);    
-    //PORTB &= ~(0x08);
-    //tick_delay(200);    
-    //PORTB &= ~(0x20);
-    //tick_delay(200);    
-    //PORTB &= ~(0x10);
-    //tick_delay(200);    
-    
     reinit_rotor_pos(&rs);
 
-    register_10hz_tick_callback(pos_controller, (void *)&rs);
+    register_10hz_tick_callback((void(*)(void *))pos_controller, (void *)&rs);
     enable_tracking(&rs);
 
-    tick_delay(10); // 1s
+    unsigned int deg;
 
-    set_target_el_deg(&rs, 30); // should be approx 7 sec
-    set_target_az_deg(&rs, 30); // should be approx 5 sec
+    while(1) {
+        ser_getline(lineb, 64);
+  
+        if(lineb[0] == 'C' && lineb[1] == '\0') {
+            sprintf(obuf, "AZ=%03d\r\n", get_az_deg(&rs));
+            ser_send_string(obuf);
+        }
+        else if(lineb[0] == 'C' && lineb[1] == '2') {
+            sprintf(obuf, "AZ=%03d EL=%03d\r\n", get_az_deg(&rs), get_el_deg(&rs));
+            ser_send_string(obuf);
+        }
+        else if(lineb[0] == 'B' && lineb[1] == '\0') {
+            sprintf(obuf, "EL=%03d\r\n", get_el_deg(&rs));
+            ser_send_string(obuf);
+        }
+        else if(lineb[0] == 'M') {
+            deg=(lineb[1]-48)*100;
+            deg+=(lineb[2]-48)*10;
+            deg+=(lineb[3]-48);
+            set_target_az_deg(&rs, deg);
+        }
+        else if(lineb[0] == 'W') {
+            deg=(lineb[1]-48)*100;
+            deg+=(lineb[2]-48)*10;
+            deg+=(lineb[3]-48);
+            set_target_az_deg(&rs, deg);
 
-    while(1);
+            deg=(lineb[5]-48)*100;
+            deg+=(lineb[6]-48)*10;
+            deg+=(lineb[7]-48);
+            set_target_el_deg(&rs, deg);
+        }
+        else {
+            ser_send_string("?>\r\n");
+        }
+    }
 
 	return 0;
 }

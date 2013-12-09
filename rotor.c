@@ -6,8 +6,6 @@
 #define MIN2(a,b) (a > b ? b : a)
 
 void reinit_rotor_pos (rotor_state_t *s) {
-    unsigned int i;
-
     s->track_target=0;
 
     AZ_CW_OFF;
@@ -15,15 +13,12 @@ void reinit_rotor_pos (rotor_state_t *s) {
     EL_UP_OFF;
     EL_DOWN_OFF;
 
-    tick_delay(2);
+    tick_delay_ms(200);
 
     AZ_CCW_ON;
     EL_UP_ON;
 
-    //for(i=0;i<(MAX_AZ/1000+5);i++) {
-    //    tick_delay(10);
-    //}
-    tick_delay(100);
+    tick_delay_ms(MAX_AZ+5000);
 
     AZ_CCW_OFF;
     EL_UP_OFF;
@@ -44,6 +39,14 @@ void set_target_az_deg (rotor_state_t *s, unsigned int az) {
 void set_target_el_deg (rotor_state_t *s, unsigned int el) {
     if(el >= 0 && el <= 90)
         s->target_pos.el_ticks = el*EL_TICKS_PER_DEG; // lookup table?
+}
+
+int get_az_deg (rotor_state_t *s) {
+    return (int)(s->pos.az_ticks/AZ_TICKS_PER_DEG);
+}
+
+int get_el_deg (rotor_state_t *s) {
+    return (int)(s->pos.el_ticks/EL_TICKS_PER_DEG);
 }
 
 void enable_tracking (rotor_state_t *s) {

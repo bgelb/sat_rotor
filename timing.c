@@ -19,8 +19,8 @@ void init_timing() {
     freq_div = 0;
 }
 
-void tick_delay(unsigned short ticks) {
-	delay = ticks*100;
+void tick_delay_ms(unsigned int ticks) {
+	delay = ticks;
 
 	while(delay>0) {
 	}
