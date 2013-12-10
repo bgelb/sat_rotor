@@ -16,9 +16,11 @@
 #define MAX_EL 22000 // 22s = 90 deg
 #define EL_TICKS_PER_DEG 244
 
-#define AZ_ERR_MAX 250 // 250ms = 1.65 deg
-#define EL_ERR_MAX 250 // 250ms = 1 deg
+#define AZ_ERR_MIN 100 // 250ms = 1.65 deg
+#define AZ_ERR_MAX 2000
 
+#define EL_ERR_MIN 100 // 250ms = 1 deg
+#define EL_ERR_MAX 2000
 typedef enum {
     AZ_IDLE,
     AZ_CW,

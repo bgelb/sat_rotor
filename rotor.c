@@ -83,20 +83,24 @@ void pos_controller (rotor_state_t *s) {
 
     if(s->track_target) {
         // AZ
-        if(s->target_pos.az_ticks > s->pos.az_ticks + AZ_ERR_MAX) { // target CW
+        if(s->target_pos.az_ticks > s->pos.az_ticks + AZ_ERR_MIN) { // target CW
             if(s->az_drive_state == AZ_IDLE) {
-                s->az_drive_state = AZ_CW;
-                AZ_CW_ON;
+                if(s->target_pos.az_ticks > s->pos.az_ticks + AZ_ERR_MAX) {
+                    s->az_drive_state = AZ_CW;
+                    AZ_CW_ON;
+                }
             }
             else if(s->az_drive_state == AZ_CCW) {
                 s->az_drive_state = AZ_IDLE;
                 AZ_CCW_OFF;
             }
         }
-        else if(s->target_pos.az_ticks + AZ_ERR_MAX < s->pos.az_ticks) { // target CCW
+        else if(s->target_pos.az_ticks + AZ_ERR_MIN < s->pos.az_ticks) { // target CCW
             if(s->az_drive_state == AZ_IDLE) {
-                s->az_drive_state = AZ_CCW;
-                AZ_CCW_ON;
+                if(s->target_pos.az_ticks + AZ_ERR_MAX < s->pos.az_ticks) {
+                    s->az_drive_state = AZ_CCW;
+                    AZ_CCW_ON;
+                }
             }
             else if(s->az_drive_state == AZ_CW) {
                 s->az_drive_state = AZ_IDLE;
@@ -109,20 +113,24 @@ void pos_controller (rotor_state_t *s) {
         } 
 
         // EL
-        if(s->target_pos.el_ticks > s->pos.el_ticks + EL_ERR_MAX) { // target UP
+        if(s->target_pos.el_ticks > s->pos.el_ticks + EL_ERR_MIN) { // target UP
             if(s->el_drive_state == EL_IDLE) {
-                s->el_drive_state = EL_UP;
-                EL_UP_ON;
+                if(s->target_pos.el_ticks > s->pos.el_ticks + EL_ERR_MAX) {
+                    s->el_drive_state = EL_UP;
+                    EL_UP_ON;
+                }
             }
             else if(s->el_drive_state == EL_DOWN) {
                 s->el_drive_state = EL_IDLE;
                 EL_DOWN_OFF;
             }
         }
-        else if(s->target_pos.el_ticks + EL_ERR_MAX < s->pos.el_ticks) { // target DOWN
+        else if(s->target_pos.el_ticks + EL_ERR_MIN < s->pos.el_ticks) { // target DOWN
             if(s->el_drive_state == EL_IDLE) {
-                s->el_drive_state = EL_DOWN;
-                EL_DOWN_ON;
+                if(s->target_pos.el_ticks + EL_ERR_MAX < s->pos.el_ticks) {
+                    s->el_drive_state = EL_DOWN;
+                    EL_DOWN_ON;
+                }
             }
             else if(s->el_drive_state == EL_UP) {
                 s->el_drive_state = EL_IDLE;
