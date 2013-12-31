@@ -53,6 +53,14 @@ int main(void)
                                     rs.target_pos.el_ticks,
                                     rs.pos.el_ticks);
             ser_send_string(obuf);
+            sprintf(obuf, "el_drive: %s\r\n",
+                (rs.el_drive_state==EL_UP ? "EL_UP" :
+                    (rs.el_drive_state==EL_DOWN ? "EL_DOWN" : "EL_IDLE")));
+            ser_send_string(obuf);
+            sprintf(obuf, "az_drive: %s\r\n",
+                (rs.az_drive_state==AZ_CW ? "AZ_CW" :
+                    (rs.az_drive_state==AZ_CCW ? "AZ_CCW" : "AZ_IDLE")));
+            ser_send_string(obuf);
         }
         else if(lineb[0] == 'M') {
             deg=(lineb[1]-48)*100;

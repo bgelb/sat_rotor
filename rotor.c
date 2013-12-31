@@ -3,7 +3,7 @@
 #include "rotor.h"
 #include "timing.h"
 
-#define MIN2(a,b) (a > b ? b : a)
+#define MIN2(a,b) ((a) > (b) ? (b) : (a))
 
 void reinit_rotor_pos (rotor_state_t *s) {
     s->track_target=0;
