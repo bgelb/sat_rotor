@@ -46,6 +46,14 @@ int main(void)
             sprintf(obuf, "+0%03d\r\n", get_el_deg(&rs));
             ser_send_string(obuf);
         }
+        else if(lineb[0] == 'D' && lineb[1] == '\0') {
+            sprintf(obuf, "az: tgt=%ld cur=%ld\r\nel: tgt=%ld cur=%ld\r\n",
+                                    rs.target_pos.az_ticks,
+                                    rs.pos.az_ticks,
+                                    rs.target_pos.el_ticks,
+                                    rs.pos.el_ticks);
+            ser_send_string(obuf);
+        }
         else if(lineb[0] == 'M') {
             deg=(lineb[1]-48)*100;
             deg+=(lineb[2]-48)*10;
