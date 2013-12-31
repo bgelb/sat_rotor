@@ -69,7 +69,7 @@ void pos_controller (rotor_state_t *s) {
         s->pos.az_ticks = s->pos.az_ticks - MIN2(s->pos.az_ticks, 100);
 
     // EL
-    if(s->el_drive_state == EL_UP && s->pos.az_ticks < MAX_EL)
+    if(s->el_drive_state == EL_UP && s->pos.el_ticks < MAX_EL)
         s->pos.el_ticks = MIN2(s->pos.el_ticks + 100, MAX_EL); // 1 tick = 100ms
     else if(s->el_drive_state == EL_DOWN && s->pos.el_ticks > 0)
         s->pos.el_ticks = s->pos.el_ticks - MIN2(s->pos.el_ticks, 100);
