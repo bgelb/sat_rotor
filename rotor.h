@@ -13,7 +13,8 @@
 #define AZ_TICKS_PER_DEG 151
 
 #define MIN_EL 0
-#define MAX_EL 22000 // 22s = 90 deg
+//#define MAX_EL 22000 // 22s = 90 deg
+#define MAX_EL 20000 // dont go as low, avoid roof
 #define EL_TICKS_PER_DEG 244
 
 #define AZ_ERR_MIN 100 // 250ms = 1.65 deg
