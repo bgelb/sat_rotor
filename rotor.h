@@ -1,20 +1,19 @@
-#define AZ_CW_ON (PORTD |= 0x40)
-#define AZ_CW_OFF (PORTD &= ~(0x40))
-#define AZ_CCW_ON (PORTB |= 0x08)
-#define AZ_CCW_OFF (PORTB &= ~(0x08))
+#define AZ_CW_ON (PORTB |= 0x08)
+#define AZ_CW_OFF (PORTB &= ~(0x08))
+#define AZ_CCW_ON (PORTB |= 0x04)
+#define AZ_CCW_OFF (PORTB &= ~(0x04))
 
-#define EL_UP_ON (PORTB |= 0x20)
-#define EL_UP_OFF (PORTB &= ~(0x20))
-#define EL_DOWN_ON (PORTB |= 0x10)
-#define EL_DOWN_OFF (PORTB &= ~(0x10))
+#define EL_UP_ON (PORTB |= 0x02)
+#define EL_UP_OFF (PORTB &= ~(0x02))
+#define EL_DOWN_ON (PORTB |= 0x01)
+#define EL_DOWN_OFF (PORTB &= ~(0x01))
 
 #define MIN_AZ 0
 #define MAX_AZ 54500 // 54.5s = 360 deg
 #define AZ_TICKS_PER_DEG 151
 
-#define MIN_EL 0
-//#define MAX_EL 22000 // 22s = 90 deg
-#define MAX_EL 20000 // dont go as low, avoid roof
+#define MIN_EL 2000 // dont go as low, avoid roof
+#define MAX_EL 22000 // 22s = 90 deg
 #define EL_TICKS_PER_DEG 244
 
 #define AZ_ERR_MIN 100 // 250ms = 1.65 deg
