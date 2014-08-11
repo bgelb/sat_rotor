@@ -32,13 +32,19 @@ void reinit_rotor_pos (rotor_state_t *s) {
 }
 
 void set_target_az_deg (rotor_state_t *s, unsigned int az) {
-    if(az >= 0 && az <= 360)
+    if(az >= 0 && az <= 360) {
+        if(az < AZ_LOW_LIMIT) az = AZ_LOW_LIMIT;
+        else if(az > AZ_HI_LIMIT) az = AZ_HI_LIMIT;
         s->target_pos.az_ticks = az*AZ_TICKS_PER_DEG; // lookup table?
+    }
 }
 
 void set_target_el_deg (rotor_state_t *s, unsigned int el) {
-    if(el >= 0 && el <= 90)
+    if(el >= 0 && el <= 90) {
+        if(el < EL_LOW_LIMIT) el = EL_LOW_LIMIT;
+        else if(el > EL_HI_LIMIT) el = EL_HI_LIMIT;
         s->target_pos.el_ticks = el*EL_TICKS_PER_DEG; // lookup table?
+    }
 }
 
 int get_az_deg (rotor_state_t *s) {
@@ -65,13 +71,13 @@ void pos_controller (rotor_state_t *s) {
     // AZ
     if(s->az_drive_state == AZ_CW && s->pos.az_ticks < MAX_AZ)
         s->pos.az_ticks = MIN2(s->pos.az_ticks + 100, MAX_AZ); // 1 tick = 100ms
-    else if(s->az_drive_state == AZ_CCW && s->pos.az_ticks > MIN_AZ)
+    else if(s->az_drive_state == AZ_CCW && s->pos.az_ticks > 0)
         s->pos.az_ticks = s->pos.az_ticks - MIN2(s->pos.az_ticks, 100);
 
     // EL
     if(s->el_drive_state == EL_UP && s->pos.el_ticks < MAX_EL)
         s->pos.el_ticks = MIN2(s->pos.el_ticks + 100, MAX_EL); // 1 tick = 100ms
-    else if(s->el_drive_state == EL_DOWN && s->pos.el_ticks > MIN_EL)
+    else if(s->el_drive_state == EL_DOWN && s->pos.el_ticks > 0)
         s->pos.el_ticks = s->pos.el_ticks - MIN2(s->pos.el_ticks, 100);
 
     //
