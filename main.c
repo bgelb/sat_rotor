@@ -22,7 +22,6 @@ int main(void)
     PORTB = 0x00;
     DDRB = 0x0F;
 
-    ser_send_string("serial up\r");
     reinit_rotor_pos(&rs);
 
     register_10hz_tick_callback((void(*)(void *))pos_controller, (void *)&rs);

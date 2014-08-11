@@ -9,9 +9,9 @@ volatile unsigned int rx_buffer_head, rx_buffer_tail;
 
 void init_serial() {
 
-	// 115200 baud w/ 7.372812MHz external osc
+	// 19200 baud w/ 7.372812MHz external osc
 	UBRRH = 0;
-	UBRRL = 3;
+	UBRRL = 23;
 
 	// 8N1
 	UCSRC = (3<<UCSZ0);
