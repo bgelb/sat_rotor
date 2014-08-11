@@ -1,12 +1,12 @@
-#define AZ_CW_ON (PORTB |= 0x08)
-#define AZ_CW_OFF (PORTB &= ~(0x08))
-#define AZ_CCW_ON (PORTB |= 0x04)
-#define AZ_CCW_OFF (PORTB &= ~(0x04))
+#define AZ_CW_ON (PORTB |= 0x01)
+#define AZ_CW_OFF (PORTB &= ~(0x01))
+#define AZ_CCW_ON (PORTB |= 0x02)
+#define AZ_CCW_OFF (PORTB &= ~(0x02))
 
-#define EL_UP_ON (PORTB |= 0x02)
-#define EL_UP_OFF (PORTB &= ~(0x02))
-#define EL_DOWN_ON (PORTB |= 0x01)
-#define EL_DOWN_OFF (PORTB &= ~(0x01))
+#define EL_UP_ON (PORTB |= 0x04)
+#define EL_UP_OFF (PORTB &= ~(0x04))
+#define EL_DOWN_ON (PORTB |= 0x08)
+#define EL_DOWN_OFF (PORTB &= ~(0x08))
 
 #define MIN_AZ 0
 #define MAX_AZ 54500 // 54.5s = 360 deg
