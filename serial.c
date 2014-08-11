@@ -9,12 +9,12 @@ volatile unsigned int rx_buffer_head, rx_buffer_tail;
 
 void init_serial() {
 
-	// 1200 baud w/ 1MHz internal osc
+	// 115200 baud w/ 7.372812MHz external osc
 	UBRRH = 0;
-	UBRRL = 51;
+	UBRRL = 3;
 
 	// 8N1
-	UCSRC = (1<<URSEL)|(3<<UCSZ0);
+	UCSRC = (3<<UCSZ0);
 
 	// Enable RX and RX Interrupt
 	UCSRB = (1<<RXCIE)|(1<<RXEN)|(1<<TXEN);
@@ -62,7 +62,7 @@ int ser_getline(char *buf, unsigned int len) {
     return i;
 }
 
-ISR(SIG_UART_RECV) {
+ISR(USART_RX_vect) {
     char x;
     x = UDR;
     if(rx_buffer) {

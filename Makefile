@@ -4,7 +4,7 @@
 PRG            = main
 OBJ            = main.o serial.o timing.o rotor.o
 			
-MCU_TARGET     = atmega8
+MCU_TARGET     = attiny4313
 OPTIMIZE       = -O2
 
 DEFS           =
@@ -16,8 +16,8 @@ CC             = avr-gcc
 
 # Override is only needed by avr-lib build system.
 
-override CFLAGS        = -g -Wall $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS)
-override LDFLAGS       = -Wl,-Map,$(PRG).map
+override CFLAGS        = -g -Wall $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS) -fno-inline-small-functions -ffunction-sections -fdata-sections -Wundef
+override LDFLAGS       = -Wl,-Map,$(PRG).map -Wl,--gc-sections -Wl,--relax
 
 OBJCOPY        = avr-objcopy
 OBJDUMP        = avr-objdump
@@ -31,9 +31,9 @@ all: $(PRG).hex
 
 
 prog: $(PRG).hex
-	avrdude -p m8 -c usbasp -U flash:w:$(PRG).hex:i
+	avrdude -p t4313 -c usbasp -U flash:w:$(PRG).hex:i
 eprog: $(PRG)_eeprom.hex
-	avrdude -p m8 -c usbasp -U eeprom:w:$(PRG)_eeprom.hex:i
+	avrdude -p t4313 -c usbasp -U eeprom:w:$(PRG)_eeprom.hex:i
 
 $(PRG).elf: $(OBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
