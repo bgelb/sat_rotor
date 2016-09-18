@@ -1,4 +1,4 @@
-Pan/Tilt Az/El Controller Firmware
+# Pan/Tilt Az/El Controller Firmware
 
 This firmware is used to control a Pan/Tilt base with synchronous motor
 (of the sort used to steer security cameras) for the purpose of satellite
@@ -6,23 +6,25 @@ antenna steering. This firmware resides on an Atmel microcontroller used to
 control relays that drive the motors in the Pan/Tilt base, and has been
 used successfully in a system consisting of the following components:
 
-- KMTronic USB Four Channel Relay Controller
+* KMTronic USB Four Channel Relay Controller
   (http://www.kmtronic.com/usb-four-channel-relay-controller-pcb.html)
-- Vicon V330APT Pan/Tilt base
-- Home-built 24VAC power supply
+* Vicon V330APT Pan/Tilt base
+* Home-built 24VAC power supply
+
+![Antenna System][rotor.jpg]
 
 The controller firmware emulates a Yaesu GS-232 rotor controller on its serial
 port and has been used successfully with the following control software:
 
-- SatPC32 12.8c (via ServerSDX)
-- Ham Radio Deluxe 5.24.0.38 (via HRD Rotator)
+* SatPC32 12.8c (via ServerSDX)
+* Ham Radio Deluxe 5.24.0.38 (via HRD Rotator)
 
 The KMTronic board was selected for the following reasons:
 
-- Has an onboard Atmel microcontroller
-- Has a USB/Serial converter already on-board (connected to UART in the uC)
-- Available relatively inexpensively on eBay
-- Has a properly designed PCB (power and ground planes, and decoupling caps)
+* Has an onboard Atmel microcontroller
+* Has a USB/Serial converter already on-board (connected to UART in the uC)
+* Available relatively inexpensively on eBay
+* Has a properly designed PCB (power and ground planes, and decoupling caps)
   so that the uC operation is not disturbed by inductive kickback on the relays
   (unlike the first one I tried to use, from http://www.whelectronics.pl)
 
