@@ -8,18 +8,16 @@
 #define EL_DOWN_ON (PORTB |= 0x08)
 #define EL_DOWN_OFF (PORTB &= ~(0x08))
 
-#define MIN_AZ 0
 #define MAX_AZ 54500 // 54.5s = 360 deg
 #define AZ_TICKS_PER_DEG 151
 
 #define AZ_LOW_LIMIT 0
 #define AZ_HI_LIMIT 360
 
-#define MIN_EL 0
 #define MAX_EL 22000 // 22s = 90 deg
 #define EL_TICKS_PER_DEG 244
 
-#define EL_LOW_LIMIT 10
+#define EL_LOW_LIMIT 0
 #define EL_HI_LIMIT 90
 
 #define AZ_ERR_MIN 100 // 250ms = 1.65 deg
