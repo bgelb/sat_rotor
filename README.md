@@ -54,10 +54,10 @@ installed:
 
 ```
 $ dpkg --get-selections | grep avr
-avr-libc					install
-avrdude						install
-binutils-avr					install
-gcc-avr						install
+avr-libc                    install
+avrdude                     install
+binutils-avr                install
+gcc-avr                     install
 ```
 If you end up using this code, I'd be curious to hear about your experiences!
 
