@@ -52,12 +52,13 @@ The supplied Makefile will build and program the firmware into a target device.
 It has been used in an Ubuntu Linux environment, with the following packages
 installed:
 
-> $ dpkg --get-selections | grep avr
-> avr-libc					install
-> avrdude					install
-> binutils-avr					install
-> gcc-avr					install
-
+```
+$ dpkg --get-selections | grep avr
+avr-libc					install
+avrdude						install
+binutils-avr					install
+gcc-avr						install
+```
 If you end up using this code, I'd be curious to hear about your experiences!
 
 73 de Ben Gelb, N1VF
