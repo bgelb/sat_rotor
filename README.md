@@ -42,7 +42,7 @@ The rotor.h file contains constants to set soft limits of the positioner
 (e.g. at one point I set the minimum elevation to 10 degrees, to avoid smacking
 the antennas into my roof). It also allows control over the hysteresis in the
 position control loop. The control loop tries to avoid turning on the motors
-unless they will be on for a decent duration (e.g. at least a few seconds) to
+unless they will be on for a decent duration (i.e. at least a few seconds) to
 avoid error accumulation from motor startup/shutdown effects. The control loop
 will not reposition the antenna unless the difference between the current and
 requested position is above a certain threshold (by default, 2 seconds of
