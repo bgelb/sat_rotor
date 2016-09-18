@@ -39,7 +39,7 @@ motors in the V330APT, as they drive at a constant speed based on the 60Hz
 rate of the AC power supply.
 
 The rotor.h file contains constants to set soft limits of the positioner
-(i.e. at one point I set the minimum elevation to 10 degrees, to avoid smacking
+(e.g. at one point I set the minimum elevation to 10 degrees, to avoid smacking
 the antennas into my roof). It also allows control over the hysteresis in the
 position control loop. The control loop tries to avoid turning on the motors
 unless they will be on for a decent duration (e.g. at least a few seconds) to
