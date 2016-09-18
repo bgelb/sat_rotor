@@ -6,7 +6,8 @@ antenna steering. This firmware resides on an Atmel microcontroller used to
 control relays that drive the motors in the Pan/Tilt base, and has been
 used successfully in a system consisting of the following components:
 
-- KMTronic USB Four Channel Relay Controller (http://www.kmtronic.com/usb-four-channel-relay-controller-pcb.html)
+- KMTronic USB Four Channel Relay Controller
+  (http://www.kmtronic.com/usb-four-channel-relay-controller-pcb.html)
 - Vicon V330APT Pan/Tilt base
 - Home-built 24VAC power supply
 
