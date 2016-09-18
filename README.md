@@ -11,7 +11,7 @@ used successfully in a system consisting of the following components:
 * Vicon V330APT Pan/Tilt base
 * Home-built 24VAC power supply
 
-![Antenna System][rotor.jpg]
+![Antenna System](rotor.jpg)
 
 The controller firmware emulates a Yaesu GS-232 rotor controller on its serial
 port and has been used successfully with the following control software:
